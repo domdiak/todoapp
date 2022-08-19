@@ -3,7 +3,7 @@ import TaskList from "./TaskList";
 import FilterBar from "./FilterBar";
 import { useEffect, useState, useRef } from "react";
 
-import { getTasks, deleteTask, updateTask, getFilteredTasks } from "./fetcher";
+import { getTasks, deleteTask, updateTask } from "./fetcher";
 
 const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
@@ -73,25 +73,22 @@ const MainInterface = () => {
     };
 
     return (
-        <div style={MainInterfaceStyle}>
+        <div className="h-screen flex flex-col  items-center p-5">
             <h1> Component: Main Interface</h1>
-            <NewTaskInput updateTasks={updateTasks} />
-            <FilterBar
-                showCompleted={showCompleted}
-                toggleFilter={toggleFilterCompleted}
-            />
-            <TaskList
-                tasks={tasks}
-                handleDelete={handleDeleteTask}
-                handleIsCompleted={handleIsCompleted}
-            />
+            <div className="w-3/6">
+                <FilterBar
+                    showCompleted={showCompleted}
+                    toggleFilter={toggleFilterCompleted}
+                />
+                <NewTaskInput updateTasks={updateTasks} />
+                <TaskList
+                    tasks={tasks}
+                    handleDelete={handleDeleteTask}
+                    handleIsCompleted={handleIsCompleted}
+                />
+            </div>
         </div>
     );
 };
 
 export default MainInterface;
-
-const MainInterfaceStyle = {
-    border: "1px solid black",
-    height: "90vh",
-};

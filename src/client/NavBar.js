@@ -1,8 +1,8 @@
 const NavBar = () => {
     return (
-        <div className="bg-black">
-            <h1> Component: NavBar</h1>
-        </div>
+        <header className="w-full  text-left p-3 bg-blue2 shadow-md shadow-blue1">
+            <h1 className="text-2xl"> To Do App</h1>
+        </header>
     );
 };
 

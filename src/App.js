@@ -4,7 +4,7 @@ import MainInterface from "./client/MainInterface";
 function App() {
     return (
         <>
-            <div className="m-7">
+            <div className="p-0 m-0 bg-white2">
                 <NavBar />
                 <MainInterface />
             </div>
