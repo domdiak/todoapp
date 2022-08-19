@@ -1,30 +1,53 @@
 import axios from "axios";
 const apiUrl = "http://localhost:8080/api/tasks";
 
-export async function getTasks() {
+export const getTasks = async () => {
     try {
         const res = await axios.get(apiUrl);
         return res.data;
     } catch (error) {
         console.error(error);
     }
-}
+};
 
-export async function addTask(task) {
+export const getFilteredTasks = async (showCompleted) => {
+    console.log("showCompleted in fetcher", showCompleted);
+    const params = {
+        showCompleted,
+    };
+
     try {
-        console.log("task in addTask fetcher", task);
-        const res = await axios.post(apiUrl, { title: task });
-        console.log("res.data", res);
+        const res = await axios.get(apiUrl, { params });
         return res.data;
     } catch (error) {
         console.error(error);
     }
-}
+};
 
-// export async function getTasks () {
-//     try {
+export const addTask = async (title) => {
+    try {
+        const res = await axios.post(apiUrl, { title });
+        return res.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
 
-//     } catch (error) {
+export const deleteTask = async (id) => {
+    try {
+        const res = await axios.delete(apiUrl + "/" + id);
+        return res.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
 
-//     }
-// }
+export const updateTask = async (task) => {
+    const { _id } = task;
+    try {
+        const res = await axios.put(apiUrl + "/" + _id, task);
+        return res.data;
+    } catch (error) {
+        console.error(error);
+    }
+};

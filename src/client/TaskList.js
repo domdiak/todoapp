@@ -1,11 +1,16 @@
 import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, handleDelete, handleIsCompleted }) => {
     return (
         <div style={TaskListStyle}>
             <h1> Component: TaskList</h1>
             {tasks.map((task) => (
-                <TaskItem key={task._id} task={task} />
+                <TaskItem
+                    key={task._id}
+                    task={task}
+                    handleDelete={handleDelete}
+                    handleIsCompleted={handleIsCompleted}
+                />
             ))}
         </div>
     );

@@ -1,22 +1,23 @@
 import { useState } from "react";
 import { addTask } from "./fetcher";
 
-const NewTaskInput = () => {
-    const [input, setInput] = useState("");
+const NewTaskInput = ({ updateTasks }) => {
+    const [taskName, setTaskName] = useState("");
 
     const handleChange = (e) => {
-        setInput(e.target.value);
+        setTaskName(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        addTask(input);
+        const newTask = await addTask(taskName);
+        updateTasks(newTask);
     };
 
     return (
         <div style={AddTaskStyle}>
             <h2> Component: AddTask</h2>
-            <input value={input} onChange={handleChange} />
+            <input value={taskName} onChange={handleChange} />
             <button type="submit" onClick={handleSubmit}>
                 {" "}
                 Add Task{" "}

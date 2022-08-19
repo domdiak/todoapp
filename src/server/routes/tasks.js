@@ -12,10 +12,15 @@ router.post("/", async (req, res) => {
     }
 });
 router.get("/", async (req, res) => {
+    const { showCompleted } = req.query;
     try {
-        console.log("API Request: GET /api/tasks");
-        const tasks = await Task.find();
-        res.send(tasks);
+        if (req.query?.showCompleted) {
+            const filteredTasks = await Task.find({ completed: showCompleted });
+            res.send(filteredTasks);
+        } else {
+            const tasks = await Task.find();
+            res.send(tasks);
+        }
     } catch (error) {
         res.send('Error in "GET /"', error);
     }
@@ -38,7 +43,7 @@ router.delete("/:id", async (req, res) => {
         const task = await Task.findByIdAndDelete(req.params.id);
         res.send(task);
     } catch (error) {
-        console.log(error);
+        res.send(error);
     }
 });
 

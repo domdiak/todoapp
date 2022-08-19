@@ -1,10 +1,23 @@
-const TaskItem = ({ task }) => {
+// import { useState } from "react";
+
+const TaskItem = ({ task, handleDelete, handleIsCompleted }) => {
+    // const [isCompleted, setIsCompleted] = useState(false);
+
+    // const toggleIsCompleted = (id) => {
+    //     setIsCompleted(!isCompleted);
+    //     handleIsCompleted(id);
+    // };
+
     return (
         <div style={TaskItemStyle}>
             <h2> Task Title: {task.title} </h2>
-            <button> Checkbox </button>
+            <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => handleIsCompleted(task)}
+            />
             <button>Edit </button>
-            <button> Delete </button>
+            <button onClick={() => handleDelete(task._id)}> Delete </button>
         </div>
     );
 };
