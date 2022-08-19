@@ -9,6 +9,7 @@ module.exports = {
             blue1: "#E2EAF8",
             blue2: "#C4D5F1",
             blue3: "#89ABE3",
+            green1: "#059669",
         },
         fontFamily: {
             sans: ["Rubik", "sans-serif"],
@@ -16,5 +17,5 @@ module.exports = {
     },
     extend: {},
     variant: {},
-    plugins: [],
+    plugins: [require("@tailwindcss/forms")],
 };

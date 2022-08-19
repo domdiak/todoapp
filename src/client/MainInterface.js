@@ -3,42 +3,33 @@ import TaskList from "./TaskList";
 import FilterBar from "./FilterBar";
 import { useEffect, useState, useRef } from "react";
 
-import { getTasks, deleteTask, updateTask } from "./fetcher";
+import { getTasks, deleteTask, updateTask, getFilteredTasks } from "./fetcher";
 
 const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
     const [showCompleted, setShowCompleted] = useState(false);
-    // const isMounted = useRef(false);
+    const isMounted = useRef(false);
     const initialRender = useRef(false);
 
-    const fetchData = async () => {
+    console.log(showCompleted);
+
+    const fetchGetTasks = async () => {
         const tasks = await getTasks();
         setTasks(tasks);
     };
+
+    const fetchGetFilteredTasks = async (showCompleted) => {
+        const filteredTasks = await getFilteredTasks(showCompleted);
+        setTasks(filteredTasks);
+    };
+
     useEffect(() => {
-        if (!initialRender.current) {
-            fetchData();
-
-            return () => {
-                initialRender.current = true;
-            };
+        if (showCompleted) {
+            fetchGetFilteredTasks(showCompleted);
+        } else {
+            fetchGetTasks();
         }
-    }, []);
-
-    // useEffect(() => {
-    //     if (isMounted.current) {
-    //         console.log("isMounted = true");
-    //         fetchFilteredData(showCompleted);
-
-    //         return () => {
-    //             console.log("cleanup");
-    //             isMounted.current = false;
-    //         };
-    //     } else {
-    //         console.log("isMounted = false");
-    //         isMounted.current = true;
-    //     }
-    // }, [showCompleted]);
+    }, [showCompleted]);
 
     const updateTasks = (newTask) => {
         const newTasks = [...tasks];
