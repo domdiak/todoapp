@@ -8,30 +8,37 @@ import { getTasks, deleteTask, updateTask, getFilteredTasks } from "./fetcher";
 const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
     const [showCompleted, setShowCompleted] = useState(false);
-    const isMounted = useRef(false);
+    // const isMounted = useRef(false);
+    const initialRender = useRef(false);
 
     const fetchData = async () => {
         const tasks = await getTasks();
         setTasks(tasks);
     };
     useEffect(() => {
-        fetchData();
+        if (!initialRender.current) {
+            fetchData();
+
+            return () => {
+                initialRender.current = true;
+            };
+        }
     }, []);
 
-    const fetchFilteredData = async (showCompleted) => {
-        console.log("fetchFilteredData");
-        const filteredTasks = await getFilteredTasks(showCompleted);
-        setTasks(filteredTasks);
-    };
+    // useEffect(() => {
+    //     if (isMounted.current) {
+    //         console.log("isMounted = true");
+    //         fetchFilteredData(showCompleted);
 
-    useEffect(() => {
-        if (isMounted.current) {
-            console.log("isMounted.current", isMounted.current);
-            fetchFilteredData(showCompleted);
-        } else {
-            isMounted.current = true;
-        }
-    }, [showCompleted]);
+    //         return () => {
+    //             console.log("cleanup");
+    //             isMounted.current = false;
+    //         };
+    //     } else {
+    //         console.log("isMounted = false");
+    //         isMounted.current = true;
+    //     }
+    // }, [showCompleted]);
 
     const updateTasks = (newTask) => {
         const newTasks = [...tasks];

@@ -4,8 +4,10 @@ import MainInterface from "./client/MainInterface";
 function App() {
     return (
         <>
-            <NavBar />
-            <MainInterface />
+            <div className="m-7">
+                <NavBar />
+                <MainInterface />
+            </div>
         </>
     );
 }

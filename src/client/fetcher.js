@@ -11,7 +11,6 @@ export const getTasks = async () => {
 };
 
 export const getFilteredTasks = async (showCompleted) => {
-    console.log("showCompleted in fetcher", showCompleted);
     const params = {
         showCompleted,
     };
