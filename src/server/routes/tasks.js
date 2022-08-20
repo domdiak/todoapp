@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
         const task = await new Task(req.body).save();
         res.send(task);
     } catch (error) {
-        res.send('Error in "POST /"', error);
+        res.send(error);
     }
 });
 router.get("/", async (req, res) => {
@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
             res.send(tasks);
         }
     } catch (error) {
-        res.send('Error in "GET /"', error);
+        res.send(error);
     }
 });
 

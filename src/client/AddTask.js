@@ -5,7 +5,7 @@ import { PlusIcon } from "@heroicons/react/solid";
 const AddTask = ({ handleAddNewTask, setError }) => {
     const [taskName, setTaskName] = useState("");
 
-    const handleChange = (e) => {
+    const handleTaskName = (e) => {
         setTaskName(e.target.value);
     };
 
@@ -27,7 +27,7 @@ const AddTask = ({ handleAddNewTask, setError }) => {
                 type="text"
                 value={taskName}
                 placeholder="What do you need to do?"
-                onChange={handleChange}
+                onChange={handleTaskName}
                 className="w-3/4 border-none focus:bg-white2 rounded-lg shadow-md focus:outline-none focus:ring-0 cursor-pointer "
             />
             <button

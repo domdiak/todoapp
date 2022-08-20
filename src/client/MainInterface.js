@@ -1,16 +1,15 @@
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import FilterBar from "./FilterBar";
+import ErrorHandler from "./ErrorHandler";
 import { useEffect, useState } from "react";
 
-import { getTasks, getFilteredTasks } from "./fetcher";
+import { getTasks } from "./fetcher";
 
 const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
     const [hideCompleted, setHideCompleted] = useState(false);
     const [error, setError] = useState("");
-
-    console.log(hideCompleted);
 
     const fetchTasks = async (hideCompleted) => {
         const tasks = await getTasks(hideCompleted);
@@ -62,7 +61,7 @@ const MainInterface = () => {
 
     return (
         <div className="h-screen flex flex-col items-center px-5 py-2">
-            {error && <div>{error}</div>}
+            {error && <ErrorHandler error={error} />}
             <div className="w-1/3">
                 <FilterBar
                     hideCompleted={hideCompleted}
@@ -74,6 +73,7 @@ const MainInterface = () => {
                 />
                 <TaskList
                     tasks={tasks}
+                    setError={setError}
                     handleDeleteTask={handleDeleteTask}
                     handleIsCompleted={handleIsCompleted}
                     handleUpdateTaskTitle={handleUpdateTaskTitle}

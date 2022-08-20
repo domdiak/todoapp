@@ -4,6 +4,7 @@ import { deleteTask, updateTask, updateTaskTitle } from "./fetcher";
 
 const TaskItem = ({
     task,
+    setError,
     handleIsCompleted,
     handleUpdateTaskTitle,
     handleDeleteTask,
@@ -21,16 +22,30 @@ const TaskItem = ({
     const onEdit = async () => {
         const { _id } = task;
         if (isEditable) {
-            const updatedTask = await updateTaskTitle(_id, title);
-            handleUpdateTaskTitle(updatedTask);
+            const { status, updatedTask, error } = await updateTaskTitle(
+                _id,
+                title
+            );
+            if (status === "success") {
+                handleUpdateTaskTitle(updatedTask);
+                setError("");
+            } else {
+                setError(error);
+            }
         }
         toggleIsEditable();
     };
 
     const onDelete = async () => {
         const { _id } = task;
-        const deletedTask = await deleteTask(_id);
-        handleDeleteTask(deletedTask);
+        const { status, deletedTask, error } = await deleteTask(_id);
+
+        if (status === "success") {
+            handleDeleteTask(deletedTask);
+            setError("");
+        } else {
+            setError(error);
+        }
     };
 
     const toggleIsCompleted = () => setIsCompleted(!isCompleted);
@@ -38,8 +53,14 @@ const TaskItem = ({
     const onIsCompleted = async () => {
         toggleIsCompleted();
         const newTask = { ...task, completed: !isCompleted };
-        await updateTask(newTask);
-        handleIsCompleted(newTask);
+        const { status, error } = await updateTask(newTask);
+
+        if (status === "success") {
+            handleIsCompleted(newTask);
+            setError("");
+        } else {
+            setError(error);
+        }
     };
 
     return (
