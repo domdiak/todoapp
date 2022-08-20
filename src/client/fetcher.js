@@ -14,19 +14,6 @@ export const getTasks = async (hideCompleted = "") => {
     }
 };
 
-export const getFilteredTasks = async (hideCompleted) => {
-    const params = {
-        completed: !hideCompleted,
-    };
-
-    try {
-        const res = await axios.get(apiUrl, { params });
-        return res.data;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
 export const addTask = async (title) => {
     try {
         const { data } = await axios.post(apiUrl, { title });
