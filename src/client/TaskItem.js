@@ -21,6 +21,9 @@ const TaskItem = ({
 
     const onEdit = async () => {
         const { _id } = task;
+        if (!title) {
+            return setError("Field cannot be empty");
+        }
         if (isEditable) {
             const { status, updatedTask, error } = await updateTaskTitle(
                 _id,

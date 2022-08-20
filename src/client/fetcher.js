@@ -39,6 +39,7 @@ export const deleteTask = async (id) => {
 export const updateTask = async (task) => {
     const { _id } = task;
     try {
+        console.log(task);
         const { data } = await axios.put(apiUrl + "/" + _id, task);
         return { status: "success", newTask: data };
     } catch (error) {
@@ -47,6 +48,7 @@ export const updateTask = async (task) => {
 };
 export const updateTaskTitle = async (id, title) => {
     try {
+        console.log(title);
         const { data } = await axios.put(apiUrl + "/" + id, { title });
         return { status: "success", updatedTask: data };
     } catch (error) {
