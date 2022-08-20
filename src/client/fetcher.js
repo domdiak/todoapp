@@ -2,9 +2,13 @@ import axios from "axios";
 const apiUrl = "http://localhost:8080/api/tasks";
 
 export const getTasks = async (hideCompleted = "") => {
-    const params = {
-        completed: hideCompleted,
-    };
+    let params;
+
+    if (hideCompleted) {
+        params = {
+            completed: !hideCompleted,
+        };
+    }
 
     try {
         const res = await axios.get(apiUrl, { params });

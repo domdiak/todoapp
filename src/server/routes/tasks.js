@@ -32,7 +32,6 @@ router.put("/:id", async (req, res) => {
             { _id: req.params.id },
             req.body
         );
-        console.log("task server", task);
         res.send(task);
     } catch (error) {
         res.send(error);
