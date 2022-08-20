@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { addTask } from "./fetcher";
 
-const NewTaskInput = ({ updateTasks }) => {
+const AddTask = ({ updateTasks }) => {
     const [taskName, setTaskName] = useState("");
 
     const handleChange = (e) => {
@@ -26,7 +26,7 @@ const NewTaskInput = ({ updateTasks }) => {
     );
 };
 
-export default NewTaskInput;
+export default AddTask;
 
 const AddTaskStyle = {
     border: "1px solid black",

@@ -1,4 +1,4 @@
-import NewTaskInput from "./NewTaskInput";
+import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import FilterBar from "./FilterBar";
 import { useEffect, useState } from "react";
@@ -7,36 +7,34 @@ import { getTasks, deleteTask, updateTask, getFilteredTasks } from "./fetcher";
 
 const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
-    const [showCompleted, setShowCompleted] = useState(false);
-
-    console.log(showCompleted);
+    const [hideCompleted, setHideCompleted] = useState(false);
 
     const fetchGetTasks = async () => {
         const tasks = await getTasks();
         setTasks(tasks);
     };
 
-    const fetchGetFilteredTasks = async (showCompleted) => {
-        const filteredTasks = await getFilteredTasks(showCompleted);
+    const fetchGetFilteredTasks = async (hideCompleted) => {
+        const filteredTasks = await getFilteredTasks(hideCompleted);
         setTasks(filteredTasks);
     };
 
     useEffect(() => {
-        if (showCompleted) {
-            fetchGetFilteredTasks(showCompleted);
+        if (hideCompleted) {
+            fetchGetFilteredTasks(hideCompleted);
         } else {
             fetchGetTasks();
         }
-    }, [showCompleted]);
+    }, [hideCompleted]);
+
+    const toggleFilterCompleted = () => {
+        setHideCompleted(!hideCompleted);
+    };
 
     const updateTasks = (newTask) => {
         const newTasks = [...tasks];
         newTasks.push(newTask);
         setTasks(newTasks);
-    };
-
-    const toggleFilterCompleted = () => {
-        setShowCompleted(!showCompleted);
     };
 
     const handleDeleteTask = async (taskId) => {
@@ -66,10 +64,10 @@ const MainInterface = () => {
             <h1> Component: Main Interface</h1>
             <div className="w-3/6">
                 <FilterBar
-                    showCompleted={showCompleted}
+                    hideCompleted={hideCompleted}
                     toggleFilter={toggleFilterCompleted}
                 />
-                <NewTaskInput updateTasks={updateTasks} />
+                <AddTask updateTasks={updateTasks} />
                 <TaskList
                     tasks={tasks}
                     handleDelete={handleDeleteTask}

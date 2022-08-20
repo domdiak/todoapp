@@ -10,12 +10,13 @@ export const getTasks = async () => {
     }
 };
 
-export const getFilteredTasks = async (showCompleted) => {
+export const getFilteredTasks = async (hideCompleted) => {
     const params = {
-        showCompleted,
+        completed: !hideCompleted,
     };
 
     try {
+        console.log(params);
         const res = await axios.get(apiUrl, { params });
         return res.data;
     } catch (error) {

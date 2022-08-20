@@ -12,10 +12,10 @@ router.post("/", async (req, res) => {
     }
 });
 router.get("/", async (req, res) => {
-    const { showCompleted } = req.query;
+    const { completed } = req.query;
     try {
-        if (req.query?.showCompleted) {
-            const filteredTasks = await Task.find({ completed: showCompleted });
+        if (req.query?.completed) {
+            const filteredTasks = await Task.find({ completed });
             res.send(filteredTasks);
         } else {
             const tasks = await Task.find();
