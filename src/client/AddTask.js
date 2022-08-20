@@ -15,6 +15,7 @@ const AddTask = ({ updateTasks, setError }) => {
         if (status === "success") {
             updateTasks(newTask);
             setError("");
+            setTaskName("");
         } else {
             setError(error);
         }
@@ -32,7 +33,8 @@ const AddTask = ({ updateTasks, setError }) => {
             <button
                 type="submit"
                 onClick={handleSubmit}
-                className="w-1/5 h-10 bg-blue2 hover:bg-blue1 text-gray-800  rounded shadow-lg borderColor flex justify-center items-center"
+                className="w-1/5 h-10 bg-blue2 enabled:hover:bg-blue1 text-gray-800  rounded shadow-lg borderColor flex justify-center items-center disabled:opacity-25"
+                disabled={!taskName}
             >
                 {" "}
                 <PlusIcon className="h-5 w-5 " />
