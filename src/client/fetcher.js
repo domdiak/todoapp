@@ -16,7 +16,6 @@ export const getFilteredTasks = async (hideCompleted) => {
     };
 
     try {
-        console.log(params);
         const res = await axios.get(apiUrl, { params });
         return res.data;
     } catch (error) {

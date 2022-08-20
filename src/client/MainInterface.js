@@ -10,21 +10,21 @@ const MainInterface = () => {
     const [hideCompleted, setHideCompleted] = useState(false);
     const [error, setError] = useState("");
 
-    const fetchGetTasks = async () => {
+    const fetchTasks = async () => {
         const tasks = await getTasks();
         setTasks(tasks);
     };
 
-    const fetchGetFilteredTasks = async (hideCompleted) => {
+    const fetchFilteredTasks = async (hideCompleted) => {
         const filteredTasks = await getFilteredTasks(hideCompleted);
         setTasks(filteredTasks);
     };
 
     useEffect(() => {
         if (hideCompleted) {
-            fetchGetFilteredTasks(hideCompleted);
+            fetchFilteredTasks(hideCompleted);
         } else {
-            fetchGetTasks();
+            fetchTasks();
         }
     }, [hideCompleted]);
 
@@ -38,22 +38,21 @@ const MainInterface = () => {
         setTasks(newTasks);
     };
 
-    const handleUpdateTaskTitle = (id, title) => {
+    const handleUpdateTaskTitle = (task) => {
         const newTasks = tasks.map((item) => {
-            if (id === item._id) {
-                return { ...item, title };
+            if (task._id === item._id) {
+                return { ...item, title: task.title };
             }
             return item;
         });
         setTasks(newTasks);
     };
 
-    const handleDeleteTask = async (taskId) => {
+    const handleDeleteTask = async (task) => {
         const newTasks = tasks.filter((item) => {
-            return item._id !== taskId;
+            return item._id !== task._id;
         });
         setTasks(newTasks);
-        await deleteTask(taskId);
     };
 
     const handleIsCompleted = async (task) => {
@@ -81,7 +80,7 @@ const MainInterface = () => {
                 <AddTask updateTasks={updateTasks} setError={setError} />
                 <TaskList
                     tasks={tasks}
-                    handleDelete={handleDeleteTask}
+                    handleDeleteTask={handleDeleteTask}
                     handleIsCompleted={handleIsCompleted}
                     handleUpdateTaskTitle={handleUpdateTaskTitle}
                 />

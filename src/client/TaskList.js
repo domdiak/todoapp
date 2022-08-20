@@ -2,7 +2,7 @@ import TaskItem from "./TaskItem";
 
 const TaskList = ({
     tasks,
-    handleDelete,
+    handleDeleteTask,
     handleIsCompleted,
     handleUpdateTaskTitle,
 }) => {
@@ -12,7 +12,7 @@ const TaskList = ({
                 <TaskItem
                     key={task._id}
                     task={task}
-                    handleDelete={handleDelete}
+                    handleDeleteTask={handleDeleteTask}
                     handleIsCompleted={handleIsCompleted}
                     handleUpdateTaskTitle={handleUpdateTaskTitle}
                 />

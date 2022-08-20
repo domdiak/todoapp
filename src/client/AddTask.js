@@ -32,7 +32,7 @@ const AddTask = ({ updateTasks, setError }) => {
             />
             <button
                 type="submit"
-                onClick={handleSubmit}
+                onSubmit={handleSubmit}
                 className="w-1/5 h-10 bg-blue2 enabled:hover:bg-blue1 text-gray-800  rounded shadow-lg borderColor flex justify-center items-center disabled:opacity-25"
                 disabled={!taskName}
             >
