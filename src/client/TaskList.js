@@ -2,8 +2,7 @@ import TaskItem from "./TaskItem";
 
 const TaskList = ({ tasks, handleDelete, handleIsCompleted }) => {
     return (
-        <div style={TaskListStyle}>
-            <h1> Component: TaskList</h1>
+        <div>
             {tasks.map((task) => (
                 <TaskItem
                     key={task._id}
@@ -17,7 +16,3 @@ const TaskList = ({ tasks, handleDelete, handleIsCompleted }) => {
 };
 
 export default TaskList;
-
-const TaskListStyle = {
-    border: "1px solid black",
-};

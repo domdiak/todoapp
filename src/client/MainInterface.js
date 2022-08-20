@@ -62,7 +62,6 @@ const MainInterface = () => {
 
     return (
         <div className="h-screen flex flex-col  items-center p-5">
-            <h1> Component: Main Interface</h1>
             {error && <div>{error}</div>}
             <div className="w-3/6">
                 <FilterBar
