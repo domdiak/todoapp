@@ -1,10 +1,11 @@
 const tasks = require("./routes/tasks");
-const connection = require("./db");
+const connectDB = require("./db");
 const cors = require("cors");
 const express = require("express");
 const app = express();
+require("dotenv").config();
 
-connection();
+connectDB(process.env.MONGO_URI);
 
 app.use(express.json());
 app.use(cors());

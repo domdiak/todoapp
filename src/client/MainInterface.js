@@ -1,15 +1,13 @@
 import NewTaskInput from "./NewTaskInput";
 import TaskList from "./TaskList";
 import FilterBar from "./FilterBar";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import { getTasks, deleteTask, updateTask, getFilteredTasks } from "./fetcher";
 
 const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
     const [showCompleted, setShowCompleted] = useState(false);
-    const isMounted = useRef(false);
-    const initialRender = useRef(false);
 
     console.log(showCompleted);
 
