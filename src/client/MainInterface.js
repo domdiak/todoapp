@@ -10,6 +10,7 @@ const MainInterface = () => {
     const [hideCompleted, setHideCompleted] = useState(false);
     const [error, setError] = useState("");
 
+    console.log("tasks MainInterface", tasks);
     const fetchTasks = async () => {
         const tasks = await getTasks();
         setTasks(tasks);

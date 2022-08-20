@@ -1,6 +1,6 @@
 import { TrashIcon, PencilIcon, CheckIcon } from "@heroicons/react/solid";
 import { useState } from "react";
-import { deleteTask, updateTaskTitle } from "./fetcher";
+import { deleteTask, updateTask, updateTaskTitle } from "./fetcher";
 
 const TaskItem = ({
     task,
@@ -9,7 +9,14 @@ const TaskItem = ({
     handleDeleteTask,
 }) => {
     const [isEditable, setIsEditable] = useState(false);
+    const [isCompleted, setIsCompleted] = useState(task.completed);
     const [title, setTitle] = useState(task.title);
+
+    const handleTitle = (e) => {
+        setTitle(e.target.value);
+    };
+
+    const toggleIsEditable = () => setIsEditable(!isEditable);
 
     const handleEdit = async () => {
         const { _id } = task;
@@ -17,7 +24,7 @@ const TaskItem = ({
             const updatedTask = await updateTaskTitle(_id, title);
             handleUpdateTaskTitle(updatedTask);
         }
-        setIsEditable(!isEditable);
+        toggleIsEditable();
     };
 
     const handleDelete = async () => {
@@ -26,16 +33,21 @@ const TaskItem = ({
         handleDeleteTask(deletedTask);
     };
 
-    const handleTitle = (e) => {
-        setTitle(e.target.value);
+    const toggleIsCompleted = () => setIsCompleted(!isCompleted);
+
+    const onIsCompleted = async () => {
+        toggleIsCompleted();
+        const newTask = { ...task, completed: !isCompleted };
+        await updateTask(newTask);
+        handleIsCompleted(newTask);
     };
 
     return (
         <div className="rounded-2xl bg-blue2 p-2 m-2 flex items-center justify-between">
             <input
                 type="checkbox"
-                checked={task.completed}
-                onChange={() => handleIsCompleted(task)}
+                checked={isCompleted}
+                onChange={onIsCompleted}
                 className="h-7 w-7 border-white2 text-green1 focus:border-white2 focus:ring-0 transition duration-200 rounded-full my-1 mx-2"
             />
             <div className="flex w-full items-center justify-between">

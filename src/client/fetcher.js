@@ -43,9 +43,11 @@ export const deleteTask = async (id) => {
 };
 
 export const updateTask = async (task) => {
+    console.log("task in fetcher", task);
     const { _id } = task;
     try {
         const res = await axios.put(apiUrl + "/" + _id, task);
+        console.log("res.data", res.data);
         return res.data;
     } catch (error) {
         console.error(error);
