@@ -26,10 +26,11 @@ export const getFilteredTasks = async (hideCompleted) => {
 
 export const addTask = async (title) => {
     try {
-        const res = await axios.post(apiUrl, { title });
-        return res.data;
+        const { data } = await axios.post(apiUrl, { title });
+        return { status: "success", newTask: data };
     } catch (error) {
-        console.error(error);
+        // console.error(error);
+        return { error: "Network error" };
     }
 };
 

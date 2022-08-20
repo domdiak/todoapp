@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { addTask } from "./fetcher";
 
-const AddTask = ({ updateTasks }) => {
+const AddTask = ({ updateTasks, setError }) => {
     const [taskName, setTaskName] = useState("");
 
     const handleChange = (e) => {
@@ -10,8 +10,13 @@ const AddTask = ({ updateTasks }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newTask = await addTask(taskName);
-        updateTasks(newTask);
+        const { status, newTask, error } = await addTask(taskName);
+        if (status === "success") {
+            updateTasks(newTask);
+            setError("");
+        } else {
+            setError(error);
+        }
     };
 
     return (

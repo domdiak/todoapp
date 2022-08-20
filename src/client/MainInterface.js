@@ -8,6 +8,7 @@ import { getTasks, deleteTask, updateTask, getFilteredTasks } from "./fetcher";
 const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
     const [hideCompleted, setHideCompleted] = useState(false);
+    const [error, setError] = useState("");
 
     const fetchGetTasks = async () => {
         const tasks = await getTasks();
@@ -27,7 +28,7 @@ const MainInterface = () => {
         }
     }, [hideCompleted]);
 
-    const toggleFilterCompleted = () => {
+    const toggleHideCompleted = () => {
         setHideCompleted(!hideCompleted);
     };
 
@@ -62,12 +63,13 @@ const MainInterface = () => {
     return (
         <div className="h-screen flex flex-col  items-center p-5">
             <h1> Component: Main Interface</h1>
+            {error && <div>{error}</div>}
             <div className="w-3/6">
                 <FilterBar
                     hideCompleted={hideCompleted}
-                    toggleFilter={toggleFilterCompleted}
+                    toggleFilter={toggleHideCompleted}
                 />
-                <AddTask updateTasks={updateTasks} />
+                <AddTask updateTasks={updateTasks} setError={setError} />
                 <TaskList
                     tasks={tasks}
                     handleDelete={handleDeleteTask}

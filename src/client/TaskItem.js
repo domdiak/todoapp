@@ -1,6 +1,9 @@
 import { TrashIcon, PencilIcon } from "@heroicons/react/solid";
+import { useState } from "react";
 
 const TaskItem = ({ task, handleDelete, handleIsCompleted }) => {
+    const [isEditable, setIsEditable] = useState(false);
+
     return (
         <div className="rounded-2xl bg-blue2 p-2 m-2 flex items-center justify-between">
             <input
@@ -10,12 +13,19 @@ const TaskItem = ({ task, handleDelete, handleIsCompleted }) => {
                 className="h-7 w-7 border-white2 text-green1 focus:border-white2 focus:ring-0 transition duration-200 rounded-full my-1 mx-2"
             />
             <div className="flex w-full items-center justify-between">
-                <h2 style={task.completed ? crossOutStyle : {}}>
-                    {" "}
-                    {task.title}{" "}
-                </h2>
+                {isEditable ? (
+                    <input value={task.title} />
+                ) : (
+                    <h2 style={task.completed ? crossOutStyle : {}}>
+                        {" "}
+                        {task.title}{" "}
+                    </h2>
+                )}
                 <div>
-                    <button className="bg-white2 hover:bg-blue1 text-gray-800 m-1 py-1 px-3 rounded shadow-lg borderColor ">
+                    <button
+                        className="bg-white2 hover:bg-blue1 text-gray-800 m-1 py-1 px-3 rounded shadow-lg borderColor "
+                        onClick={() => setIsEditable(!isEditable)}
+                    >
                         {" "}
                         <PencilIcon className="h-4 w-4" />
                     </button>
