@@ -1,4 +1,4 @@
-const FilterBar = ({ showCompleted, toggleFilter }) => {
+const FilterBar = ({ hideCompleted, toggleFilter }) => {
     return (
         <div className="p-2 m-2  flex items-center justify-end ">
             <div className="flex items-end ">
@@ -10,7 +10,7 @@ const FilterBar = ({ showCompleted, toggleFilter }) => {
                         type="checkbox"
                         id="toggle-completed"
                         className="sr-only"
-                        checked={showCompleted}
+                        checked={hideCompleted}
                         onChange={toggleFilter}
                     />
                     <div className="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full"></div>
