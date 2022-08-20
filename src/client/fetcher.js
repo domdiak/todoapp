@@ -52,3 +52,11 @@ export const updateTask = async (task) => {
         console.error(error);
     }
 };
+export const updateTaskTitle = async (id, title) => {
+    try {
+        const res = await axios.put(apiUrl + "/" + id, { title });
+        return res.data;
+    } catch (error) {
+        console.error(error);
+    }
+};

@@ -38,6 +38,16 @@ const MainInterface = () => {
         setTasks(newTasks);
     };
 
+    const handleUpdateTaskTitle = (id, title) => {
+        const newTasks = tasks.map((item) => {
+            if (id === item._id) {
+                return { ...item, title };
+            }
+            return item;
+        });
+        setTasks(newTasks);
+    };
+
     const handleDeleteTask = async (taskId) => {
         const newTasks = tasks.filter((item) => {
             return item._id !== taskId;
@@ -73,6 +83,7 @@ const MainInterface = () => {
                     tasks={tasks}
                     handleDelete={handleDeleteTask}
                     handleIsCompleted={handleIsCompleted}
+                    handleUpdateTaskTitle={handleUpdateTaskTitle}
                 />
             </div>
         </div>

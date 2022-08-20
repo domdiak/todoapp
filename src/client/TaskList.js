@@ -1,6 +1,11 @@
 import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks, handleDelete, handleIsCompleted }) => {
+const TaskList = ({
+    tasks,
+    handleDelete,
+    handleIsCompleted,
+    handleUpdateTaskTitle,
+}) => {
     return (
         <div>
             {tasks.map((task) => (
@@ -9,6 +14,7 @@ const TaskList = ({ tasks, handleDelete, handleIsCompleted }) => {
                     task={task}
                     handleDelete={handleDelete}
                     handleIsCompleted={handleIsCompleted}
+                    handleUpdateTaskTitle={handleUpdateTaskTitle}
                 />
             ))}
         </div>
