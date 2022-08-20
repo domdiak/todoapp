@@ -18,7 +18,7 @@ const TaskItem = ({
 
     const toggleIsEditable = () => setIsEditable(!isEditable);
 
-    const handleEdit = async () => {
+    const onEdit = async () => {
         const { _id } = task;
         if (isEditable) {
             const updatedTask = await updateTaskTitle(_id, title);
@@ -27,7 +27,7 @@ const TaskItem = ({
         toggleIsEditable();
     };
 
-    const handleDelete = async () => {
+    const onDelete = async () => {
         const { _id } = task;
         const deletedTask = await deleteTask(_id);
         handleDeleteTask(deletedTask);
@@ -62,7 +62,7 @@ const TaskItem = ({
                 <div>
                     <button
                         className="bg-white2 hover:bg-blue1 text-gray-800 m-1 py-1 px-3 rounded shadow-lg borderColor "
-                        onClick={handleEdit}
+                        onClick={onEdit}
                     >
                         {isEditable ? (
                             <CheckIcon className="h-4 w-4" />
@@ -71,7 +71,7 @@ const TaskItem = ({
                         )}
                     </button>
                     <button
-                        onClick={handleDelete}
+                        onClick={onDelete}
                         className="bg-white2 hover:bg-blue1 text-gray-800 m-1 py-1 px-3 rounded shadow-lg"
                     >
                         {" "}

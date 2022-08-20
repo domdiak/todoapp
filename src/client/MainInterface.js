@@ -3,39 +3,33 @@ import TaskList from "./TaskList";
 import FilterBar from "./FilterBar";
 import { useEffect, useState } from "react";
 
-import { getTasks, deleteTask, updateTask, getFilteredTasks } from "./fetcher";
+import { getTasks, getFilteredTasks } from "./fetcher";
 
 const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
     const [hideCompleted, setHideCompleted] = useState(false);
     const [error, setError] = useState("");
 
-    console.log("tasks MainInterface", tasks);
-    const fetchTasks = async () => {
-        const tasks = await getTasks();
-        setTasks(tasks);
-    };
+    console.log("hideCompleted", hideCompleted);
 
-    const fetchFilteredTasks = async (hideCompleted) => {
-        const filteredTasks = await getFilteredTasks(hideCompleted);
-        setTasks(filteredTasks);
+    const fetchTasks = async (hideCompleted) => {
+        const tasks = await getTasks(hideCompleted);
+        setTasks(tasks);
     };
 
     useEffect(() => {
         if (hideCompleted) {
-            fetchFilteredTasks(hideCompleted);
+            fetchTasks(hideCompleted);
         } else {
             fetchTasks();
         }
     }, [hideCompleted]);
 
-    const toggleHideCompleted = () => {
-        setHideCompleted(!hideCompleted);
-    };
+    const toggleHideCompleted = () => setHideCompleted(!hideCompleted);
 
-    const updateTasks = (newTask) => {
+    const handleAddNewTask = (task) => {
         const newTasks = [...tasks];
-        newTasks.push(newTask);
+        newTasks.push(task);
         setTasks(newTasks);
     };
 
@@ -59,15 +53,11 @@ const MainInterface = () => {
     const handleIsCompleted = async (task) => {
         const newTasks = tasks.map((item) => {
             if (item._id === task._id) {
-                return { ...item, completed: !item.completed };
+                return task;
             }
             return item;
         });
-
-        const updatedTask = newTasks.find((item) => item._id === task._id);
         setTasks(newTasks);
-
-        await updateTask(updatedTask);
     };
 
     return (
@@ -78,7 +68,10 @@ const MainInterface = () => {
                     hideCompleted={hideCompleted}
                     toggleFilter={toggleHideCompleted}
                 />
-                <AddTask updateTasks={updateTasks} setError={setError} />
+                <AddTask
+                    handleAddNewTask={handleAddNewTask}
+                    setError={setError}
+                />
                 <TaskList
                     tasks={tasks}
                     handleDeleteTask={handleDeleteTask}

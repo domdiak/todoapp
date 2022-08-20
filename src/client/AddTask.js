@@ -2,18 +2,18 @@ import { useState } from "react";
 import { addTask } from "./fetcher";
 import { PlusIcon } from "@heroicons/react/solid";
 
-const AddTask = ({ updateTasks, setError }) => {
+const AddTask = ({ handleAddNewTask, setError }) => {
     const [taskName, setTaskName] = useState("");
 
     const handleChange = (e) => {
         setTaskName(e.target.value);
     };
 
-    const handleSubmit = async (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         const { status, newTask, error } = await addTask(taskName);
         if (status === "success") {
-            updateTasks(newTask);
+            handleAddNewTask(newTask);
             setError("");
             setTaskName("");
         } else {
@@ -32,7 +32,7 @@ const AddTask = ({ updateTasks, setError }) => {
             />
             <button
                 type="submit"
-                onSubmit={handleSubmit}
+                onClick={onSubmit}
                 className="w-1/5 h-10 bg-blue2 enabled:hover:bg-blue1 text-gray-800  rounded shadow-lg borderColor flex justify-center items-center disabled:opacity-25"
                 disabled={!taskName}
             >

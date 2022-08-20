@@ -1,9 +1,13 @@
 import axios from "axios";
 const apiUrl = "http://localhost:8080/api/tasks";
 
-export const getTasks = async () => {
+export const getTasks = async (hideCompleted = "") => {
+    const params = {
+        completed: hideCompleted,
+    };
+
     try {
-        const res = await axios.get(apiUrl);
+        const res = await axios.get(apiUrl, { params });
         return res.data;
     } catch (error) {
         console.error(error);
@@ -43,11 +47,9 @@ export const deleteTask = async (id) => {
 };
 
 export const updateTask = async (task) => {
-    console.log("task in fetcher", task);
     const { _id } = task;
     try {
         const res = await axios.put(apiUrl + "/" + _id, task);
-        console.log("res.data", res.data);
         return res.data;
     } catch (error) {
         console.error(error);
