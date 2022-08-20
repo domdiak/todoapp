@@ -61,9 +61,9 @@ const MainInterface = () => {
     };
 
     return (
-        <div className="h-screen flex flex-col  items-center p-5">
+        <div className="h-screen flex flex-col items-center px-5 py-2">
             {error && <div>{error}</div>}
-            <div className="w-3/6">
+            <div className="w-1/3">
                 <FilterBar
                     hideCompleted={hideCompleted}
                     toggleFilter={toggleHideCompleted}
