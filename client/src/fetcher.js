@@ -14,7 +14,7 @@ export const getTasks = async (hideCompleted = "") => {
         const res = await axios.get(apiUrl, { params });
         return res.data;
     } catch (error) {
-        return { error: "Network error" };
+        return { error: `Network error` };
     }
 };
 
@@ -43,14 +43,5 @@ export const updateTask = async (task) => {
         return { status: "success", updatedTask: data };
     } catch (error) {
         return { error: "Network error" };
-    }
-};
-export const updateTaskTitle = async (id, title) => {
-    try {
-        console.log(title);
-        const { data } = await axios.put(apiUrl + "/" + id, { title });
-        return { status: "success", updatedTask: data };
-    } catch (error) {
-        console.error(error);
     }
 };

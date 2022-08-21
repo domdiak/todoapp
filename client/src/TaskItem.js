@@ -20,16 +20,14 @@ const TaskItem = ({
     const toggleIsEditable = () => setIsEditable(!isEditable);
 
     const onEdit = async () => {
-        const { _id } = task;
         if (!title) {
             return setError("Field cannot be empty");
         }
         if (isEditable) {
-            const { status, updatedTask, error } = await updateTaskTitle(
-                _id,
-                title
+            const newUpdatedTask = { ...task, title };
+            const { status, updatedTask, error } = await updateTask(
+                newUpdatedTask
             );
-            console.log("updatedTask", updatedTask);
             if (status === "success") {
                 handleUpdateTaskTitle(updatedTask);
                 setError("");
@@ -53,8 +51,8 @@ const TaskItem = ({
     };
 
     const onIsCompleted = async () => {
-        const newTask = { ...task, completed: !task.completed };
-        const { status, error, updatedTask } = await updateTask(newTask);
+        const newUpdatedTask = { ...task, completed: !task.completed };
+        const { status, error, updatedTask } = await updateTask(newUpdatedTask);
 
         if (status === "success") {
             handleIsCompleted(updatedTask);

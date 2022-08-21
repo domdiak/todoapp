@@ -10,7 +10,6 @@ const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
     const [hideCompleted, setHideCompleted] = useState(false);
     const [error, setError] = useState("");
-    // const [error, setError] = useState("Cannot be left empty");
 
     const fetchTasks = async (hideCompleted) => {
         const tasks = await getTasks(hideCompleted);
@@ -57,6 +56,7 @@ const MainInterface = () => {
             }
             return item;
         });
+
         setTasks(newTasks);
     };
 
