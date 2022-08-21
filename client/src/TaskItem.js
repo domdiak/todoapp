@@ -10,7 +10,6 @@ const TaskItem = ({
     handleDeleteTask,
 }) => {
     const [isEditable, setIsEditable] = useState(false);
-    const [isCompleted, setIsCompleted] = useState(task.completed);
     const [title, setTitle] = useState(task.title);
 
     const handleTitle = (e) => {
@@ -25,10 +24,13 @@ const TaskItem = ({
             return setError("Field cannot be empty");
         }
         if (isEditable) {
+            console.log("id", _id);
+            console.log("title", title);
             const { status, updatedTask, error } = await updateTaskTitle(
                 _id,
                 title
             );
+            console.log("updatedTask", updatedTask);
             if (status === "success") {
                 handleUpdateTaskTitle(updatedTask);
                 setError("");
@@ -51,15 +53,12 @@ const TaskItem = ({
         }
     };
 
-    const toggleIsCompleted = () => setIsCompleted(!isCompleted);
-
     const onIsCompleted = async () => {
-        toggleIsCompleted();
-        const newTask = { ...task, completed: !isCompleted };
-        const { status, error } = await updateTask(newTask);
+        const newTask = { ...task, completed: !task.completed };
+        const { status, error, updatedTask } = await updateTask(newTask);
 
         if (status === "success") {
-            handleIsCompleted(newTask);
+            handleIsCompleted(updatedTask);
             setError("");
         } else {
             setError(error);
@@ -70,7 +69,7 @@ const TaskItem = ({
         <div className="rounded-2xl bg-blue2 p-2 m-2 flex items-center justify-between">
             <input
                 type="checkbox"
-                checked={isCompleted}
+                checked={task.completed}
                 onChange={onIsCompleted}
                 className="h-7 w-7 border-white2 text-green1 focus:border-white2 focus:ring-0 transition duration-200 rounded-full my-1 mx-2"
             />

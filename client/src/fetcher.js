@@ -41,7 +41,7 @@ export const updateTask = async (task) => {
     try {
         console.log(task);
         const { data } = await axios.put(apiUrl + "/" + _id, task);
-        return { status: "success", newTask: data };
+        return { status: "success", updatedTask: data };
     } catch (error) {
         return { error: "Network error" };
     }

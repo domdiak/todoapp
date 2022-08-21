@@ -30,8 +30,10 @@ router.put("/:id", async (req, res) => {
     try {
         const task = await Task.findOneAndUpdate(
             { _id: req.params.id },
-            req.body
+            req.body,
+            { new: true }
         );
+        console.log("task server", task);
         res.send(task);
     } catch (error) {
         res.send(error);
