@@ -1,5 +1,5 @@
-import NavBar from "./src/NavBar";
-import MainInterface from "./src/MainInterface";
+import NavBar from "./components/NavBar";
+import MainInterface from "./pages/MainInterface";
 
 function App() {
     return (

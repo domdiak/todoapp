@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addTask } from "./fetcher";
+import { addTask } from "../fetcher";
 import { PlusIcon } from "@heroicons/react/solid";
 
 const AddTask = ({ handleAddNewTask, setError }) => {

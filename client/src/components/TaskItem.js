@@ -1,7 +1,7 @@
 import { TrashIcon, PencilIcon, CheckIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import Editable from "./Editable";
-import { deleteTask, updateTask } from "./fetcher";
+import { deleteTask, updateTask } from "../fetcher";
 
 const TaskItem = ({
     task,

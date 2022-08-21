@@ -1,10 +1,10 @@
-import AddTask from "./AddTask";
-import TaskList from "./TaskList";
-import FilterBar from "./FilterBar";
-import ErrorHandler from "./ErrorHandler";
+import AddTask from "../components/AddTask";
+import TaskList from "../components/TaskList";
+import FilterBar from "../components/FilterBar";
+import ErrorHandler from "../components/ErrorHandler";
 import { useEffect, useState } from "react";
 
-import { getTasks } from "./fetcher";
+import { getTasks } from "../fetcher";
 
 const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
