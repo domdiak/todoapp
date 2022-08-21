@@ -1,12 +1,12 @@
 import { TrashIcon, PencilIcon, CheckIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import Editable from "./Editable";
-import { deleteTask, updateTask, updateTaskTitle } from "./fetcher";
+import { deleteTask, updateTask } from "./fetcher";
 
 const TaskItem = ({
     task,
     setError,
-    handleIsCompleted,
+    handleComplete,
     handleUpdateTaskTitle,
     handleDeleteTask,
 }) => {
@@ -55,7 +55,7 @@ const TaskItem = ({
         const { status, error, updatedTask } = await updateTask(newUpdatedTask);
 
         if (status === "success") {
-            handleIsCompleted(updatedTask);
+            handleComplete(updatedTask);
             setError("");
         } else {
             setError(error);
@@ -88,9 +88,9 @@ const TaskItem = ({
                         onClick={onEdit}
                     >
                         {isEditable ? (
-                            <CheckIcon className="h-4 w-4" />
+                            <CheckIcon className="icon-primary" />
                         ) : (
-                            <PencilIcon className="h-4 w-4" />
+                            <PencilIcon className="icon-primary" />
                         )}
                     </button>
                     <button
@@ -98,7 +98,7 @@ const TaskItem = ({
                         className="bg-white2 hover:bg-blue1 text-gray-800 m-1 py-1 px-3 rounded shadow-lg"
                     >
                         {" "}
-                        <TrashIcon className="h-4 w-4" />
+                        <TrashIcon className="icon-primary" />
                     </button>
                 </div>
             </div>

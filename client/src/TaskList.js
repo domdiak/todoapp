@@ -4,7 +4,7 @@ const TaskList = ({
     tasks,
     setError,
     handleDeleteTask,
-    handleIsCompleted,
+    handleComplete,
     handleUpdateTaskTitle,
 }) => {
     return (
@@ -15,7 +15,7 @@ const TaskList = ({
                     task={task}
                     setError={setError}
                     handleDeleteTask={handleDeleteTask}
-                    handleIsCompleted={handleIsCompleted}
+                    handleComplete={handleComplete}
                     handleUpdateTaskTitle={handleUpdateTaskTitle}
                 />
             ))}

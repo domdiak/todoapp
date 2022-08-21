@@ -11,8 +11,8 @@ export const getTasks = async (hideCompleted = "") => {
     }
 
     try {
-        const res = await axios.get(apiUrl, { params });
-        return res.data;
+        const { data } = await axios.get(apiUrl, { params });
+        return { status: "success", tasks: data };
     } catch (error) {
         return { error: `Network error` };
     }
