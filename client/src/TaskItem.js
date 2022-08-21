@@ -1,5 +1,6 @@
 import { TrashIcon, PencilIcon, CheckIcon } from "@heroicons/react/solid";
 import { useState } from "react";
+import Editable from "./Editable";
 import { deleteTask, updateTask, updateTaskTitle } from "./fetcher";
 
 const TaskItem = ({
@@ -24,8 +25,6 @@ const TaskItem = ({
             return setError("Field cannot be empty");
         }
         if (isEditable) {
-            console.log("id", _id);
-            console.log("title", title);
             const { status, updatedTask, error } = await updateTaskTitle(
                 _id,
                 title
@@ -75,16 +74,19 @@ const TaskItem = ({
             />
             <div className="flex w-full items-center justify-between">
                 {isEditable ? (
-                    <input value={title} onChange={handleTitle} />
+                    <Editable handleTitle={handleTitle} title={title} />
                 ) : (
-                    <h2 style={task.completed ? crossOutStyle : {}}>
-                        {" "}
-                        {task.title}{" "}
+                    <h2
+                        className={`p-1 ${
+                            task.completed ? "line-through" : ""
+                        }`}
+                    >
+                        {task.title}
                     </h2>
                 )}
                 <div>
                     <button
-                        className="bg-white2 hover:bg-blue1 text-gray-800 m-1 py-1 px-3 rounded shadow-lg borderColor "
+                        className="bg-white2 hover:bg-blue1 text-gray-800 m-1 py-1 px-3 rounded shadow-lg "
                         onClick={onEdit}
                     >
                         {isEditable ? (
@@ -107,7 +109,3 @@ const TaskItem = ({
 };
 
 export default TaskItem;
-
-const crossOutStyle = {
-    textDecoration: "line-through",
-};

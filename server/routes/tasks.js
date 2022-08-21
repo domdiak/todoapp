@@ -4,7 +4,6 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
-        console.log("API Request: POST /api/tasks");
         const task = await new Task(req.body).save();
         res.send(task);
     } catch (error) {
@@ -33,7 +32,6 @@ router.put("/:id", async (req, res) => {
             req.body,
             { new: true }
         );
-        console.log("task server", task);
         res.send(task);
     } catch (error) {
         res.send(error);

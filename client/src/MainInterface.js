@@ -10,6 +10,7 @@ const MainInterface = () => {
     const [tasks, setTasks] = useState([]);
     const [hideCompleted, setHideCompleted] = useState(false);
     const [error, setError] = useState("");
+    // const [error, setError] = useState("Cannot be left empty");
 
     const fetchTasks = async (hideCompleted) => {
         const tasks = await getTasks(hideCompleted);
@@ -61,8 +62,7 @@ const MainInterface = () => {
 
     return (
         <div className="h-screen flex flex-col items-center px-5 py-2">
-            {error && <ErrorHandler error={error} />}
-            <div className="w-1/3">
+            <div className="w-1/3 ">
                 <FilterBar
                     hideCompleted={hideCompleted}
                     toggleFilter={toggleHideCompleted}
@@ -78,6 +78,7 @@ const MainInterface = () => {
                     handleIsCompleted={handleIsCompleted}
                     handleUpdateTaskTitle={handleUpdateTaskTitle}
                 />
+                {error && <ErrorHandler error={error} />}
             </div>
         </div>
     );
