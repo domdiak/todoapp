@@ -3,6 +3,14 @@
 
 To Do App focuses on frontend implementation of the task with a basic backend set-up.
 
+<img width="400" alt="image" src="https://user-images.githubusercontent.com/95252828/185862172-71e296a2-24a7-46e4-a987-9f281811469b.png">
+
+### How to run:
+- Created a `.env` file based on `.env-template`
+- Replace MONGO_URI with your MONGO_URI key 
+- Run `npm install` 
+- Start the client with `npm start` and the server with `npm run server` 
+
 ### Technologies:
 
 ---
@@ -20,11 +28,7 @@ To Do App focuses on frontend implementation of the task with a basic backend se
 - A user can mark a task as completed
 - A user is able to hide complete tasks with a toggle
 
-### Installation:
-- Created a `.env` file based on `.env-template`
-- Replace MONGO_URI with your MONGO_URI key 
-- Run `npm install` 
-- Start the client with `npm start` and the server with `npm run server` 
+
 
 ## Design
 ### Frontend:
@@ -58,7 +62,7 @@ To Do App focuses on frontend implementation of the task with a basic backend se
 ### Data Layer:
 ---
 
-- MongoDB database which contains a single table storing tasks and their related properties:
+- MongoDB database which contains a single collection storing tasks and their related properties:
     - _id (auto-generated)
     - title (type: String)
     - completed (type: Boolean)
