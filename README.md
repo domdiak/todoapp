@@ -1,4 +1,6 @@
 
+### Description 
+
 To Do App focuses on frontend implementation of the task with a basic backend set-up.
 
 ### Technologies:
