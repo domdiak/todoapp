@@ -1,70 +1,62 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To Do App focuses on frontend implementation of the task with a basic backend set-up.
 
-## Available Scripts
+### Technologies:
 
-In the project directory, you can run:
+---
 
-### `npm start`
+- **Frontend**: React, TailwindCSS
+- **Backend**: Node.js/Express, MongoDB
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Features:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+- Interface which displays a list of tasks
+- A user is able to add and  delete tasks
+- A user can update the task title
+- A user can mark a task as completed
+- A user is able to hide complete tasks with a toggle
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation:
+- Created a `.env` file based on `.env-template`
+- Replace MONGO_URI with your MONGO_URI key 
+- Run `npm install` 
+- Start the client with `npm start` and the server with `npm run server` 
 
-### `npm run build`
+## Design
+### Frontend:
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Built in React and styling was implemented with Tailwind CSS
+- `App component` contains existing parts of the layout (i.e. NavBar and Main Interface) and allows for easy addition of new layout components, such as Sidebar Menu, or React Router functionality
+- `MainInterface component` contains a major chunk of this application’s logic:
+    - Located in `pages` folder all views (added in the future) would live
+    - `task` state and `fetchTasks` function which hold and retrieve DB data
+    - All actions relating to the `task` state are performed with `handle...` functions, which are held in this component and passed as props to child components
+    - Contains 4 child components with each component having a single and distinctive functionality:
+        - `FilterBar` - toggle for hiding/showing already completed tasks
+        - `AddTask` - allows for adding of new tasks
+        - `TaskList` - displays a list of all tasks
+        - `Error Message` - responsible for display of client-side errors
+- `on...`  functions take care of interactions with the server-side and always invoke `handle...`functions to bring local state up-to-date:
+    - `AddTask` contains `onSubmit` function
+    - `TaskItem` (child inside `TaskList`) contains `onEdit, onDelete, onIsCompleted`functions
+- `fetcher.js` contains all Axios requests and keeps them separate from React logic in the component
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Tradeoffs:
+- `hideCompleted` filters for completed tasks on the backend, I would have moved it to the front-end and preform all filter operations there to maintain consistency (currently, a filter in `handleComplete` takes place in the frontend)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Backend:
+---
 
-### `npm run eject`
+- A simple REST API built with Express.js
+- Single route which handles all CRUD operations related to tasks
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Data Layer:
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- MongoDB database which contains a single table storing tasks and their related properties:
+    - _id (auto-generated)
+    - title (type: String)
+    - completed (type: Boolean)
