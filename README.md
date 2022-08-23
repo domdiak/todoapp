@@ -37,7 +37,7 @@ To Do App focuses on frontend implementation of the task with a basic backend se
 - Built in React and styling was implemented with Tailwind CSS
 - `App component` contains existing parts of the layout (i.e. NavBar and Main Interface) and allows for easy addition of new layout components, such as Sidebar Menu, or React Router functionality
 - `MainInterface component` contains a major chunk of this application’s logic:
-    - Located in `pages` folder all views (added in the future) would live
+    - Located in `pages` folder where all views (added in the future) would live
     - `task` state and `fetchTasks` function which hold and retrieve DB data
     - All actions relating to the `task` state are performed with `handle...` functions, which are held in this component and passed as props to child components
     - Contains 4 child components with each component having a single and distinctive functionality:
