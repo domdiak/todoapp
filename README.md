@@ -1,7 +1,8 @@
 
 ## Description 
 
-To Do App focuses on frontend implementation of the task with a basic backend set-up.
+Things is a simple to-do-app, built to showcase my frontend skillset.
+
 
 <img width="400" alt="image" src="https://user-images.githubusercontent.com/95252828/185862172-71e296a2-24a7-46e4-a987-9f281811469b.png">
 
